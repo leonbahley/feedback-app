@@ -1,0 +1,36 @@
+.commentItem__name {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.194444px;
+  color: #3a4374;
+}
+.commentItem__text {
+  font-size: 15px;
+  line-height: 22px;
+  color: #647196;
+  max-width: 590px;
+  margin-left: auto;
+}
+.commentItem__replyBtn {
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 19px;
+  color: #4661e6;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  margin-left: auto;
+}
+.commentItem__wrapper {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+.commentItem {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 2px solid #8c92b345;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
