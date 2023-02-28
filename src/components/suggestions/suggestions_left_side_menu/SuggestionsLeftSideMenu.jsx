@@ -1,6 +1,11 @@
-import styles from './SuggestionsLeftSideMenu.module.css';
+import styles from "./SuggestionsLeftSideMenu.module.css";
+import { useNavigate } from "react-router-dom";
 
 export default function SuggestionsLeftSideMenu() {
+  const navigate = useNavigate();
+  const viewRoadmap = () => {
+    navigate("/roadmap");
+  };
   return (
     <div className={styles.mainWrapper}>
       <div className={styles.titleBlock}>
@@ -18,7 +23,9 @@ export default function SuggestionsLeftSideMenu() {
       <div className={styles.roadmapBlock}>
         <div className={styles.roadmapBlock__wrapper}>
           <h2 className={styles.roadmapBlock__title}>Roadmap</h2>
-          <button className={styles.roadmapBlock__button}>View</button>
+          <button onClick={viewRoadmap} className={styles.roadmapBlock__button}>
+            View
+          </button>
         </div>
         <ul className={styles.roadmapBlock__itemList}>
           <li className={styles.roadmapBlock__item}>

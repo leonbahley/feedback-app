@@ -1,9 +1,15 @@
-import styles from './SuggestionsMainPart.module.css';
-import man from './images/man.png';
-import Button from '../../button/Button';
-import SuggestionItem from '../suggestion_item/SuggestionItem';
+import styles from "./SuggestionsMainPart.module.css";
+import { useNavigate } from "react-router-dom";
+import man from "./images/man.png";
+import Button from "../../button/Button";
+import SuggestionItem from "../suggestion_item/SuggestionItem";
 
 export default function SuggestionsMainPart() {
+  const navigate = useNavigate();
+
+  const addSuggestion = () => {
+    navigate("/add-suggestion");
+  };
   return (
     <main>
       {false ? (
@@ -16,7 +22,9 @@ export default function SuggestionsMainPart() {
             Got a suggestion? Found a bug that needs to be squashed? We love
             hearing about new ideas to improve our app.
           </p>
-          <Button bkgColor="#ad1fea">+ Add Feedback</Button>
+          <Button handleClick={addSuggestion} bkgColor="#ad1fea">
+            + Add Feedback
+          </Button>
         </div>
       ) : (
         <div className={styles.suggestionsWrapper}>

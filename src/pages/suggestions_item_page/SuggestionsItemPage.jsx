@@ -1,14 +1,19 @@
 import styles from "./SuggestionsItemPage.module.css";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import SuggestionItem from "../../components/suggestions/suggestion_item/SuggestionItem";
 import Button from "../../components/button/Button";
 import GobackButton from "../../components/go-back-button/GobackButton";
 import CommentItem from "../../components/comment_item/CommentItem";
 
 export default function SuggestionsItemPage() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const backLinkHref = location.state?.from ?? "/";
+  const { id } = useParams();
   return (
     <div className={styles.primaryWrapper}>
       <div className={styles.secondaryWrapper}>
-        <GobackButton />
+        <GobackButton handleClick={goBack} />
         <Button bkgColor="#4661E6">Edit Feedback</Button>
       </div>
 

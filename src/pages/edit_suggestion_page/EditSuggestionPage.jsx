@@ -1,12 +1,21 @@
-import styles from './EditSuggestionPage.module.css';
-import pen from './images/pen.png';
-import Button from '../../components/button/Button';
-import GobackButton from '../../components/go-back-button/GobackButton';
+import styles from "./EditSuggestionPage.module.css";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
+import pen from "./images/pen.png";
+import Button from "../../components/button/Button";
+import GobackButton from "../../components/go-back-button/GobackButton";
 
 export default function EditSuggestionPage() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const backLinkHref = location.state?.from ?? "/";
+  const { id } = useParams();
+
+  const goBack = () => {
+    navigate(backLinkHref);
+  };
   return (
     <div className={styles.primaryWrapper}>
-      <GobackButton />
+      <GobackButton handleClick={goBack} />
       <div className={styles.secondaryWrapper}>
         <div className={styles.secondaryWrapper__decoratingPlus}>
           <img width={24} src={pen} alt="pen" />
@@ -45,7 +54,9 @@ export default function EditSuggestionPage() {
           <div className={styles.form__primaryButtonWrapper}>
             <Button bkgColor="#E98888">Delete</Button>
             <div className={styles.form__secondaryButtonWrapper}>
-              <Button bkgColor="#3A4374">Cancel</Button>
+              <Button handleClick={goBack} bkgColor="#3A4374">
+                Cancel
+              </Button>
               <Button bkgColor="#AD1FEA">Save Changes</Button>
             </div>
           </div>

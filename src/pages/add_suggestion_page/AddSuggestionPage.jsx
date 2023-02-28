@@ -1,11 +1,20 @@
 import styles from "./AddSuggestionPage.module.css";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import GobackButton from "../../components/go-back-button/GobackButton";
 import Button from "../../components/button/Button";
 
 export default function AddSuggestionPage() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const backLinkHref = location.state?.from ?? "/";
+  const { id } = useParams();
+
+  const goBack = () => {
+    navigate(backLinkHref);
+  };
   return (
     <div className={styles.primaryWrapper}>
-      <GobackButton />
+      <GobackButton handleClick={goBack} />
       <div className={styles.secondaryWrapper}>
         <div className={styles.secondaryWrapper__decoratingPlus}>+</div>
         <h1 className={styles.secondaryWrapper__title}>Create New Feedback</h1>
@@ -31,7 +40,9 @@ export default function AddSuggestionPage() {
           </p>
           <textarea className={styles.formTextArea}></textarea>
           <div className={styles.form__buttonWrapper}>
-            <Button bkgColor="#3A4374">Cancel</Button>
+            <Button handleClick={goBack} bkgColor="#3A4374">
+              Cancel
+            </Button>
             <Button bkgColor="#AD1FEA">Add Feedback</Button>
           </div>
         </form>
