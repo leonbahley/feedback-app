@@ -1,29 +1,50 @@
 import styles from "./SuggestionItem.module.css";
+import { useNavigate, useParams } from "react-router-dom";
 import comment from "./images/comment.png";
 import UpvoteButton from "../../upvote_button/UpvoteButton";
 
-export default function SuggestionItem() {
+export default function SuggestionItem({
+  title,
+  category,
+  detail,
+  id,
+  upvote_count,
+  comments_qty,
+  commentsReplies,
+}) {
+  const { suggestionId } = useParams();
+  const navigate = useNavigate();
+
+  const navigateToSuggestion = (e) => {
+    if (
+      e.target.id !== "commentButton" &&
+      e.target.id !== "upvoteButton" &&
+      !suggestionId
+    ) {
+      navigate(`/${id}`);
+    }
+  };
+
   return (
-    <div className={styles.suggestionItem}>
-      <UpvoteButton />
+    <div
+      style={{ cursor: suggestionId && "default" }}
+      id={id}
+      onClick={navigateToSuggestion}
+      className={styles.suggestionItem}
+    >
+      <UpvoteButton upvote_count={upvote_count} id={id} />
       <div className={styles.suggestionItem__descriptionBlock}>
-        <h3 className={styles.suggestionItem__title}>Add tags for solutions</h3>
-        <p className={styles.suggestionItem__description}>
-          Easier to search for solutions based on a specific stack. Easier to
-          search for solutions based on a specific stack. Easier to search for
-          solutions based on a specific stack. Easier to search for solutions
-          based on a specific stack. Easier to search for solutions based on a
-          specific stack. Easier to search for solutions based on a specific
-          stack. Easier to search for solutions based on a specific stack.
-          Easier to search for solutions based on a specific stack.
-        </p>
+        <h3 className={styles.suggestionItem__title}>{title}</h3>
+        <p className={styles.suggestionItem__description}>{detail}</p>
         <div className={styles.suggestionItem__category}>
-          <p>All</p>
+          <p>{category}</p>
         </div>
       </div>
-      <div className={styles.suggestionItem__comment}>
-        <img width={18} src={comment} alt="comment" />
-        <span className={styles.suggestionItem__commentQty}>56</span>
+      <div id="commentButton" className={styles.suggestionItem__comment}>
+        <img id="commentButton" width={18} src={comment} alt="comment" />
+        <span id="commentButton" className={styles.suggestionItem__commentQty}>
+          {comments_qty}
+        </span>
       </div>
     </div>
   );

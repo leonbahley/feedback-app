@@ -4,6 +4,7 @@
   border-radius: 10px;
   display: flex;
   gap: 40px;
+  cursor: pointer;
 }
 .suggestionItem__category {
   background: #f2f4ff;
@@ -48,4 +49,6 @@
 .suggestionItem__comment {
   margin-left: auto;
   align-self: center;
+  display: flex;
+  align-items: center;
 }

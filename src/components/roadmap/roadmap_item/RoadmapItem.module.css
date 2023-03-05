@@ -4,6 +4,7 @@
   padding: 31px 32px;
   border-radius: 5px;
   border-top: 7px solid #f49f85;
+  cursor: pointer;
 }
 .statusWrapper {
   display: flex;

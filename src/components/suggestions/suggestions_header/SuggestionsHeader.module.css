@@ -26,4 +26,7 @@
 .suggestionsHeader__sortDropdown {
   font-weight: bold;
   margin-left: 4px;
+  background-color: transparent;
+  color: #f2f4fe;
+  border: none;
 }

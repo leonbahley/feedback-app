@@ -108,3 +108,6 @@
   line-height: 19px;
   cursor: pointer;
 }
+.roadmapBlock__button:hover {
+  color: #8397f8;
+}

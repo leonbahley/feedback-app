@@ -6,9 +6,14 @@ export default function Button({
   buttonType = "button",
   handleClick,
 }) {
+  const handleButtonAction = () => {
+    if (buttonType === "button") {
+      handleClick();
+    }
+  };
   return (
     <button
-      onClick={() => handleClick()}
+      onClick={handleButtonAction}
       type={buttonType}
       style={{ backgroundColor: bkgColor }}
       className={styles.button}

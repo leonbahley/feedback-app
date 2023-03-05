@@ -7,11 +7,18 @@ import styles from "./RoadMapHeader.module.css";
 export default function RoadMapHeader() {
   const navigate = useNavigate();
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? "/";
+  const backLinkHref = "/";
 
   const goBack = () => {
     navigate(backLinkHref);
   };
+
+  const addSuggestion = () => {
+    navigate("/add-suggestion", {
+      state: { from: location.pathname },
+    });
+  };
+
   return (
     <header className={styles.header}>
       <div>
@@ -19,7 +26,9 @@ export default function RoadMapHeader() {
         <h2 className={styles.header__title}>Roadmap</h2>
       </div>
 
-      <Button bkgColor="#ad1fea">+ Add Feedback</Button>
+      <Button handleClick={addSuggestion} bkgColor="#ad1fea">
+        + Add Feedback
+      </Button>
     </header>
   );
 }

@@ -11,9 +11,12 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<SuggestionsPage />} />
         <Route path="add-suggestion" element={<AddSuggestionPage />} />
-        <Route path="edit-suggestion" element={<EditSuggestionPage />} />
+        <Route
+          path="edit-suggestion/:suggestionId"
+          element={<EditSuggestionPage />}
+        />
         <Route path="roadmap" element={<RoadmapPage />} />
-        <Route path="suggestion/:id" element={<SuggestionsItemPage />} />
+        <Route path="/:suggestionId" element={<SuggestionsItemPage />} />
         <Route path="*" element={<SuggestionsPage />} />
       </Routes>
     </>
