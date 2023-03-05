@@ -10,7 +10,6 @@ export default function SuggestionItem({
   id,
   upvote_count,
   comments_qty,
-  commentsReplies,
 }) {
   const { suggestionId } = useParams();
   const navigate = useNavigate();

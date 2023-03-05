@@ -48,14 +48,6 @@
   display: flex;
   flex-direction: column;
 }
-.formDropdown {
-  background: #f7f8fd;
-  border-radius: 5px;
-  margin-bottom: 24px;
-  border: none;
-  min-height: 48px;
-  padding: 0 5px;
-}
 .primaryWrapper {
   display: flex;
   flex-direction: column;

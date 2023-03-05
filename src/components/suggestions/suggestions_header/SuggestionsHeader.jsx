@@ -4,6 +4,8 @@ import lightbulb from "./images/bulb.png";
 import Button from "../../button/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { setSortBy } from "../../../redux/filterSuggestions/filter_suggestions_slice";
+import Select from "react-select";
+import { options, defineDefaultSortBy, style } from "./dropdownSettings";
 
 export default function SuggestionsHeader() {
   const dispatch = useDispatch();
@@ -15,29 +17,29 @@ export default function SuggestionsHeader() {
     navigate("/add-suggestion");
   };
 
-  const options = ["one", "two", "three"];
-  const defaultOption = options[0];
+  const defaultSortBy = defineDefaultSortBy(sortBy);
+
+  const handleChange = (selected) => {
+    dispatch(setSortBy(selected.value));
+  };
+
   return (
     <header className={styles.suggestionsHeader}>
       <img width={24} src={lightbulb} alt="lightbulb" />
       <h2 className={styles.suggestionsHeader__title}>
         <span>{suggestionsQty}</span>Suggestions
       </h2>
-      <p className={styles.suggestionsHeader__sortFeature}>
-        Sort by :
-        <select
-          defaultValue={sortBy}
-          onChange={(e) => dispatch(setSortBy(e.currentTarget.value))}
-          className={styles.suggestionsHeader__sortDropdown}
-          id="sortBy"
-          name="sortBy"
-        >
-          <option value="most-upvotes">Most Upvotes</option>
-          <option value="least-upvotes">Least Upvotes</option>
-          <option value="most-comments">Most Comments</option>
-          <option value="least-comments">Least Comments</option>
-        </select>
-      </p>
+      <div className={styles.suggestionsHeader__sortFeature}>
+        <p className={styles.suggestionsHeader__sortFeature}>Sort by : </p>
+        <Select
+          options={options}
+          styles={style}
+          defaultValue={defaultSortBy}
+          isSearchable={false}
+          onChange={handleChange}
+        />
+      </div>
+
       <Button handleClick={addSuggestion} bkgColor="#ad1fea">
         + Add Feedback
       </Button>

@@ -1,16 +1,17 @@
 import styles from "./AddSuggestionPage.module.css";
-import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import GobackButton from "../../components/go-back-button/GobackButton";
 import Button from "../../components/button/Button";
 import { useDispatch } from "react-redux";
 import { addSuggestion } from "../../redux/suggestions/suggestions_operations";
+import Select from "react-select";
+import { options, style } from "./dropdownSettings";
 
 export default function AddSuggestionPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const backLinkHref = location.state?.from ?? "/";
-  const { id } = useParams();
 
   const goBack = () => {
     navigate(backLinkHref);
@@ -52,13 +53,14 @@ export default function AddSuggestionPage() {
           <p className={styles.formDescr}>
             Choose a category for your feedback
           </p>
-          <select className={styles.formDropdown} id="category" name="category">
-            <option value="feature">Feature</option>
-            <option value="ui">UI</option>
-            <option value="ux">UX</option>
-            <option value="bug">Bug</option>
-            <option value="enhancement">Enhancement</option>
-          </select>
+          <Select
+            name="category"
+            options={options}
+            styles={style}
+            defaultValue={options[0]}
+            isSearchable={false}
+          />
+
           <h2 className={styles.formTitle}>Feedback Detail</h2>
           <p className={styles.formDescr}>
             Include any specific comments on what should be improved, added,

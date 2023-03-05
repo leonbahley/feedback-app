@@ -3,13 +3,21 @@ import { useParams, useLocation, useNavigate } from "react-router-dom";
 import pen from "./images/pen.png";
 import Button from "../../components/button/Button";
 import GobackButton from "../../components/go-back-button/GobackButton";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteSuggestion,
   editSuggestion,
   fetchSuggestionItem,
 } from "../../redux/suggestions/suggestions_operations";
+import {
+  categoryOptions,
+  statusOptions,
+  defineDefaultCategory,
+  defineDefaultStatus,
+  style,
+} from "./dropdownSettings";
+import Select from "react-select";
 
 export default function EditSuggestionPage() {
   const dispatch = useDispatch();
@@ -58,6 +66,10 @@ export default function EditSuggestionPage() {
     }, 100);
   };
 
+  const defaultCategory = defineDefaultCategory(suggestionItem?.category);
+
+  const defaultStatuts = defineDefaultStatus(suggestionItem?.status);
+
   return (
     <div className={styles.primaryWrapper}>
       <GobackButton handleClick={goBack} />
@@ -83,30 +95,24 @@ export default function EditSuggestionPage() {
           <p className={styles.formDescr}>
             Choose a category for your feedback
           </p>
-          <select
-            defaultValue={suggestionItem?.category}
-            className={styles.formDropdown}
-            id="category"
+          <Select
             name="category"
-          >
-            <option value="feature">Feature</option>
-            <option value="ui">UI</option>
-            <option value="ux">UX</option>
-            <option value="bug">Bug</option>
-            <option value="enhancement">Enhancement</option>
-          </select>
+            options={categoryOptions}
+            styles={style}
+            defaultValue={defaultCategory}
+            isSearchable={false}
+          
+          />
           <h2 className={styles.formTitle}>Update Status</h2>
           <p className={styles.formDescr}>Change feedback state</p>
-          <select
-            defaultValue={suggestionItem?.status}
-            className={styles.formDropdown}
-            id="status"
+          <Select
             name="status"
-          >
-            <option value="planned">Planned</option>
-            <option value="in-progress">In Progress</option>
-            <option value="live">Live</option>
-          </select>
+            options={statusOptions}
+            styles={style}
+            defaultValue={defaultStatuts}
+            isSearchable={false}
+    
+          />
           <h2 className={styles.formTitle}>Feedback Detail</h2>
           <p className={styles.formDescr}>
             Include any specific comments on what should be improved, added,
