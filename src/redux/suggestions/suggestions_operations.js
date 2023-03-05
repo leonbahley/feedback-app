@@ -8,9 +8,6 @@ export const fetchSuggestions = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await axios.get("/api/suggestions");
-      // if (response.data.length === 0) {
-      //   return
-      // }
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
