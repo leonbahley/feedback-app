@@ -27,11 +27,8 @@ export default function AddSuggestionPage() {
         detail: data.get("detail"),
       })
     );
-
     event.currentTarget.reset();
-    setTimeout(() => {
-      navigate(backLinkHref);
-    }, 100);
+    navigate(backLinkHref);
   };
   return (
     <div className={styles.primaryWrapper}>

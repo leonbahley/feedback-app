@@ -60,10 +60,7 @@ export default function EditSuggestionPage() {
 
   const deleteItem = () => {
     dispatch(deleteSuggestion(suggestionId));
-
-    setTimeout(() => {
-      navigate("/");
-    }, 100);
+    navigate("/");
   };
 
   const defaultCategory = defineDefaultCategory(suggestionItem?.category);
@@ -101,7 +98,6 @@ export default function EditSuggestionPage() {
             styles={style}
             defaultValue={defaultCategory}
             isSearchable={false}
-          
           />
           <h2 className={styles.formTitle}>Update Status</h2>
           <p className={styles.formDescr}>Change feedback state</p>
@@ -111,7 +107,6 @@ export default function EditSuggestionPage() {
             styles={style}
             defaultValue={defaultStatuts}
             isSearchable={false}
-    
           />
           <h2 className={styles.formTitle}>Feedback Detail</h2>
           <p className={styles.formDescr}>
