@@ -2,6 +2,7 @@ import styles from "./SuggestionItem.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import comment from "./images/comment.png";
 import UpvoteButton from "../../upvote_button/UpvoteButton";
+import { capitalizeFirstLetter } from "../../../helpers/caputalizeCategory";
 
 export default function SuggestionItem({
   title,
@@ -36,7 +37,7 @@ export default function SuggestionItem({
         <h3 className={styles.suggestionItem__title}>{title}</h3>
         <p className={styles.suggestionItem__description}>{detail}</p>
         <div className={styles.suggestionItem__category}>
-          <p>{category}</p>
+          <p>{capitalizeFirstLetter(category)}</p>
         </div>
       </div>
       <div id="commentButton" className={styles.suggestionItem__comment}>

@@ -23,8 +23,7 @@ export default function EditSuggestionPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-
-  const backLinkHref = location.state?.from ?? "/";
+  const backLinkHref = location.state?.from.pathname ?? "/";
 
   const { suggestionId } = useParams();
   const suggestionItem = useSelector(
@@ -36,7 +35,9 @@ export default function EditSuggestionPage() {
   }, [dispatch, suggestionId]);
 
   const goBack = () => {
-    navigate(backLinkHref);
+    if (location.state?.from?.state?.from) {
+      navigate(backLinkHref, { state: { to: "/roadmap" } });
+    } else navigate(backLinkHref);
   };
 
   const handleSubmit = (event) => {
@@ -53,14 +54,12 @@ export default function EditSuggestionPage() {
     );
 
     event.currentTarget.reset();
-    setTimeout(() => {
-      navigate(backLinkHref);
-    }, 100);
+    goBack();
   };
 
   const deleteItem = () => {
     dispatch(deleteSuggestion(suggestionId));
-    navigate("/");
+    goBack();
   };
 
   const defaultCategory = defineDefaultCategory(suggestionItem?.category);
@@ -93,6 +92,7 @@ export default function EditSuggestionPage() {
             Choose a category for your feedback
           </p>
           <Select
+            required
             name="category"
             options={categoryOptions}
             styles={style}
@@ -102,6 +102,7 @@ export default function EditSuggestionPage() {
           <h2 className={styles.formTitle}>Update Status</h2>
           <p className={styles.formDescr}>Change feedback state</p>
           <Select
+            required
             name="status"
             options={statusOptions}
             styles={style}

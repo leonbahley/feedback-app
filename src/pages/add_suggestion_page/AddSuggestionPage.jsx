@@ -51,6 +51,7 @@ export default function AddSuggestionPage() {
             Choose a category for your feedback
           </p>
           <Select
+            required
             name="category"
             options={options}
             styles={style}

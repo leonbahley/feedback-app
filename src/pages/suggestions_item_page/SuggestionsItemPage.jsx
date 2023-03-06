@@ -10,12 +10,15 @@ import { useEffect, useState } from "react";
 import { fetchSuggestionItem } from "../../redux/suggestions/suggestions_operations";
 import { comment } from "../../redux/suggestions/suggestions_operations";
 
-export default function SuggestionsItemPage({ navigation }) {
+export default function SuggestionsItemPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const fetchedItem = useSelector((state) => state.suggestions.fetchedItemById);
-  const backLinkHref = location.state?.from ?? "/";
+  const backLinkHref = location.state?.to
+    ? "/roadmap"
+    : location.state?.from ?? "/";
+
   const { suggestionId } = useParams();
 
   const [commentLength, setCommentLength] = useState(null);
@@ -38,6 +41,7 @@ export default function SuggestionsItemPage({ navigation }) {
     setCommentLength(null);
     e.currentTarget.reset();
   };
+
   return (
     <div className={styles.primaryWrapper}>
       <div className={styles.secondaryWrapper}>
@@ -45,7 +49,9 @@ export default function SuggestionsItemPage({ navigation }) {
         <Button
           handleClick={() =>
             navigate(`/edit-suggestion/${suggestionId}`, {
-              state: { from: location.pathname },
+              state: {
+                from: location,
+              },
             })
           }
           bkgColor="#4661E6"

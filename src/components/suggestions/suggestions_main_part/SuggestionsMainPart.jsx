@@ -44,10 +44,10 @@ export default function SuggestionsMainPart() {
         <div className={styles.suggestionsWrapper}>
           {suggestionsToRender.map(
             ({
+              _id,
               title,
               category,
               detail,
-              _id,
               upvote_count,
               comments,
               commentsReplies,
@@ -59,7 +59,7 @@ export default function SuggestionsMainPart() {
                 detail={detail}
                 id={_id}
                 upvote_count={upvote_count}
-                comments_qty={comments.length + commentsReplies.length}
+                comments_qty={comments?.length + commentsReplies?.length}
               />
             )
           )}

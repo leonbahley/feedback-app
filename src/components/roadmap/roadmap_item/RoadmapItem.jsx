@@ -2,6 +2,7 @@ import styles from "./RoadmapItem.module.css";
 import UpvoteButton from "../../upvote_button/UpvoteButton";
 import comment from "../../suggestions/suggestion_item/images/comment.png";
 import { useLocation, useNavigate } from "react-router-dom";
+import { capitalizeFirstLetter } from "../../../helpers/caputalizeCategory";
 
 export default function RoadmapItem({
   title,
@@ -31,7 +32,7 @@ export default function RoadmapItem({
       </div>
       <h2 className={styles.title}>{title}</h2>
       <p className={styles.description}>{detail}</p>
-      <div className={styles.category}>{category}</div>
+      <div className={styles.category}>{capitalizeFirstLetter(category)}</div>
       <div className={styles.secondaryWrapper}>
         <UpvoteButton id={id} upvote_count={upvote_count} />
         <img
