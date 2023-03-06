@@ -24,10 +24,24 @@ export default function RoadmapItem({
     }
   };
 
+  const color =
+    status === "planned"
+      ? "#f49f85"
+      : status === "in-progress"
+      ? "#AD1FEA"
+      : "#62BCFA";
+
   return (
-    <div onClick={handleGoToItem} className={styles.primaryWrapper}>
+    <div
+      style={{ borderColor: color }}
+      onClick={handleGoToItem}
+      className={styles.primaryWrapper}
+    >
       <div className={styles.statusWrapper}>
-        <span className={styles.decorationDot}></span>
+        <span
+          style={{ backgroundColor: color }}
+          className={styles.decorationDot}
+        ></span>
         {status}
       </div>
       <h2 className={styles.title}>{title}</h2>

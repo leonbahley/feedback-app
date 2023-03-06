@@ -30,3 +30,15 @@
   flex-direction: column;
   gap: 10px;
 }
+.primaryWrapper {
+  position: relative;
+}
+.spinner {
+  position: absolute;
+  background-color: #fff;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}

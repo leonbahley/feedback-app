@@ -5,6 +5,7 @@
   display: flex;
   gap: 40px;
   cursor: pointer;
+  position: relative;
 }
 .suggestionItem__category {
   background: #f2f4ff;
@@ -51,4 +52,13 @@
   align-self: center;
   display: flex;
   align-items: center;
+}
+.spinner {
+  position: absolute;
+  background-color: #fff;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
 }

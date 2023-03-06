@@ -15,13 +15,24 @@ const suggestionsSlice = createSlice({
   initialState: {
     items: [],
     fetchedItemById: null,
+    areLoading: false,
+    itemIsLoading: false,
+    commentsAreLoading: false,
   },
   extraReducers: {
     [fetchSuggestions.fulfilled](state, action) {
       state.items = action.payload;
+      state.areLoading = false;
+    },
+    [fetchSuggestions.pending](state, action) {
+      state.areLoading = true;
     },
     [addSuggestion.fulfilled](state, action) {
       state.items.push(action.payload);
+      state.areLoading = false;
+    },
+    [addSuggestion.pending](state, action) {
+      state.areLoading = true;
     },
     [deleteSuggestion.fulfilled](state, action) {
       const index = state.items.findIndex(
@@ -29,15 +40,31 @@ const suggestionsSlice = createSlice({
       );
       state.items.splice(index, 1);
       state.fetchedItemById.upvote_count += 1;
+      state.areLoading = false;
+    },
+    [deleteSuggestion.pending](state, action) {
+      state.areLoading = true;
     },
     [editSuggestion.fulfilled](state, action) {
       const index = state.items.findIndex(
         (suggestion) => suggestion.id === action.payload._id
       );
       state.items[index] = action.payload;
+      state.commentsAreLoading = false;
+      state.itemIsLoading = false;
+    },
+    [editSuggestion.pending](state, action) {
+      state.commentsAreLoading = true;
+      state.itemIsLoading = true;
     },
     [fetchSuggestionItem.fulfilled](state, action) {
       state.fetchedItemById = action.payload;
+      state.itemIsLoading = false;
+      state.commentsAreLoading = false;
+    },
+    [fetchSuggestionItem.pending](state, action) {
+      state.itemIsLoading = true;
+      state.commentsAreLoading = true;
     },
     [upvote.fulfilled](state, action) {
       const index = state.items.findIndex(
@@ -55,9 +82,17 @@ const suggestionsSlice = createSlice({
     },
     [comment.fulfilled](state, action) {
       state.fetchedItemById.comments.push(action.payload);
+      state.commentsAreLoading = false;
+    },
+    [comment.pending](state, action) {
+      state.commentsAreLoading = true;
     },
     [replyComment.fulfilled](state, action) {
       state.fetchedItemById.commentsReplies.push(action.payload);
+      state.commentsAreLoading = false;
+    },
+    [replyComment.pending](state, action) {
+      state.commentsAreLoading = true;
     },
   },
 });

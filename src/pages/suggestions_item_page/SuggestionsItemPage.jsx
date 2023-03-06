@@ -9,8 +9,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchSuggestionItem } from "../../redux/suggestions/suggestions_operations";
 import { comment } from "../../redux/suggestions/suggestions_operations";
+import ClipLoader from "react-spinners/ClipLoader";
 
 export default function SuggestionsItemPage() {
+  const commentsAreLoading = useSelector(
+    (state) => state.suggestions.commentsAreLoading
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -73,6 +77,16 @@ export default function SuggestionsItemPage() {
         />
       )}
       <div className={styles.commentsBlock}>
+        {commentsAreLoading && (
+          <div className={styles.spinner}>
+            <ClipLoader
+              loading={true}
+              size={150}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          </div>
+        )}
         <h2 className={styles.commentsBlock__title}>
           {fetchedItem?.comments.length} Comments
         </h2>

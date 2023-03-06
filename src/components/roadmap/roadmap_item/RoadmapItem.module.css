@@ -3,7 +3,7 @@
   width: 350px;
   padding: 31px 32px;
   border-radius: 5px;
-  border-top: 7px solid #f49f85;
+  border-top: 7px solid;
   cursor: pointer;
 }
 .statusWrapper {
@@ -19,7 +19,6 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: #f49f85;
 }
 .title {
   font-weight: 700;

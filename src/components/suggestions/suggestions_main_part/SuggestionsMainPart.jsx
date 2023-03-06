@@ -7,12 +7,14 @@ import Button from "../../button/Button";
 import SuggestionItem from "../suggestion_item/SuggestionItem";
 import { fetchSuggestions } from "../../../redux/suggestions/suggestions_operations";
 import { filteredSuggestions } from "../../../helpers/filtered_suggestions";
+import ClipLoader from "react-spinners/ClipLoader";
 
 export default function SuggestionsMainPart() {
   const dispatch = useDispatch();
   const suggestions = useSelector((state) => state.suggestions.items);
   const filter = useSelector((state) => state.filter);
   const sortBy = useSelector((state) => state.sort_by);
+  const areLoading = useSelector((state) => state.suggestions.areLoading);
   const navigate = useNavigate();
 
   const suggestionsToRender = filteredSuggestions(suggestions, filter, sortBy);
@@ -24,8 +26,20 @@ export default function SuggestionsMainPart() {
   useEffect(() => {
     dispatch(fetchSuggestions());
   }, [dispatch]);
+
   return (
-    <main>
+    <main className={styles.primaryWrapper}>
+      {areLoading && (
+        <div className={styles.spinner}>
+          <ClipLoader
+            loading={true}
+            size={150}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </div>
+      )}
+
       {!suggestionsToRender?.length ? (
         <div className={styles.noFeedbackBlock}>
           <img width={130} src={man} alt="man" />

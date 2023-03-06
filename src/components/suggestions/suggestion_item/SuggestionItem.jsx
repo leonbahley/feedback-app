@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import comment from "./images/comment.png";
 import UpvoteButton from "../../upvote_button/UpvoteButton";
 import { capitalizeFirstLetter } from "../../../helpers/caputalizeCategory";
+import ClipLoader from "react-spinners/ClipLoader";
+import { useSelector } from "react-redux";
 
 export default function SuggestionItem({
   title,
@@ -12,6 +14,7 @@ export default function SuggestionItem({
   upvote_count,
   comments_qty,
 }) {
+  const isLoading = useSelector((state) => state.suggestions.itemIsLoading);
   const { suggestionId } = useParams();
   const navigate = useNavigate();
 
@@ -32,6 +35,16 @@ export default function SuggestionItem({
       onClick={navigateToSuggestion}
       className={styles.suggestionItem}
     >
+      {isLoading && (
+        <div className={styles.spinner}>
+          <ClipLoader
+            loading={true}
+            size={150}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </div>
+      )}
       <UpvoteButton upvote_count={upvote_count} id={id} />
       <div className={styles.suggestionItem__descriptionBlock}>
         <h3 className={styles.suggestionItem__title}>{title}</h3>
