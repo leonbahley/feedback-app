@@ -28,7 +28,7 @@ const suggestionsSlice = createSlice({
       state.areLoading = true;
     },
     [addSuggestion.fulfilled](state, action) {
-      state.items.push(action.payload);
+      state.items.unshift(action.payload);
       state.areLoading = false;
     },
     [addSuggestion.pending](state, action) {
